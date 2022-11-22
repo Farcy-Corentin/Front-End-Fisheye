@@ -1,20 +1,37 @@
 {
-  "name": "fisheye",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
   "prettier": "prettier-config-standard",
-  "devDependencies": {
-    "eslint": "^8.0.1",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "prettier": "2.7.1",
-    "prettier-config-standard": "^5.0.0"
+  "ts-standard": {
+    "project": "./tsconfig.json"
   },
   "scripts": {
-    "prettier": "prettier --write .\n",
-    "lint": "eslint ."
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prettier": "prettier --write ."
+  },
+  "dependencies": {
+    "next": "13.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.7",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
+    "eslint": "8.26.0",
+    "eslint-config-next": "13.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.5.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "2.7.1",
+    "prettier-config-standard": "^5.0.0",
+    "sass": "^1.56.1",
+    "typescript": "4.8.4"
   }
 }

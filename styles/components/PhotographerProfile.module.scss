@@ -1,0 +1,30 @@
+@import 'styles/utils/colors';
+
+.photographer_profile_title {
+  color: map-get($colors, primary, normal);
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.photographer_profile_address {
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  color: map-get($colors, primary, dark);
+}
+
+.photographer_profile_tagline {
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  color: map-get($colors, neutral, dark);
+}
+
+.photographer_profile_price {
+  font-weight: bold;
+  font-size: 13px;
+  text-align: center;
+  color: map-get($colors, neutral, medium-grey);
+}
