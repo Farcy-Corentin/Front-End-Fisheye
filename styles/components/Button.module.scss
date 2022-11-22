@@ -1,0 +1,33 @@
+@import 'styles/utils/colors';
+@import 'styles/utils/variables';
+@import 'styles/utils/mixins';
+
+.contact_button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  position: relative;
+  z-index: 1;
+  @include border-none;
+  background-color: map-get($colors, primary, dark);
+  border-radius: $border-radius;
+  cursor: pointer;
+
+  &:hover {
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::after {
+    @include pseudo($loc: before);
+    opacity: 0;
+    background-color: map-get($colors, primary, normal);
+    color: map-get($colors, neutral, dark);
+    z-index: -1;
+    transition: opacity 300ms 100ms ease-in-out;
+  }
+}
