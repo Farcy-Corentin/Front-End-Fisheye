@@ -2,7 +2,7 @@
 @import 'styles/utils/variables';
 @import 'styles/utils/mixins';
 
-.contact_button {
+.contactButton {
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -15,19 +15,19 @@
   background-color: map-get($colors, primary, dark);
   border-radius: $border-radius;
   cursor: pointer;
+}
 
-  &:hover {
-    &::after {
-      opacity: 1;
-    }
-  }
+.contactButton:hover {
+  background-color: map-get($colors, primary, normal);
+  color: map-get($colors, neutral, dark);
+  transition: background-color 150ms 50ms ease-in-out,
+    color 150ms 100ms ease-in-out;
+}
 
-  &::after {
-    @include pseudo($loc: before);
-    opacity: 0;
-    background-color: map-get($colors, primary, normal);
-    color: map-get($colors, neutral, dark);
-    z-index: -1;
-    transition: opacity 300ms 100ms ease-in-out;
-  }
+.contactButton::after {
+  @include pseudo($content: 'Contactez moi');
+  opacity: 0;
+
+  border-radius: $border-radius;
+  z-index: -1;
 }
