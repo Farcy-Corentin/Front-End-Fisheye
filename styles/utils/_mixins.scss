@@ -15,7 +15,6 @@
 }
 
 @mixin pseudo(
-  $loc: before,
   $content: '',
   $pos: absolute,
   $top: 0,
@@ -23,15 +22,11 @@
   $left: 0,
   $right: 0
 ) {
-  position: relative;
-
-  &::#{$loc} {
-    content: $content;
-    position: $pos;
-    top: $top;
-    bottom: $bottom;
-    left: $left;
-    right: $right;
-    @content;
-  }
+  content: $content;
+  position: $pos;
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+  @content;
 }

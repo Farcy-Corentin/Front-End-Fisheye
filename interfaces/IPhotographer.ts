@@ -20,6 +20,7 @@ export interface IPhotographer {
 
 export interface PhotographerProfileView {
   id: number
+  url: string
   name: string
   picture: string
   address: string

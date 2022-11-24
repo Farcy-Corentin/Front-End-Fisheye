@@ -11,17 +11,16 @@ export default function PhotographersSection({
     PhotographerFactory.createPhotographerProfileView(photographer)
 
   return (
-    <>
-      <article>
-        <PhotographerProfile
-          id={photographerProfileView.id}
-          name={photographerProfileView.name}
-          picture={photographerProfileView.picture}
-          address={photographerProfileView.address}
-          tagline={photographerProfileView.tagline}
-          formattedPrice={photographerProfileView.formattedPrice}
-        />
-      </article>
-    </>
+    <article>
+      <PhotographerProfile
+        id={photographerProfileView.id}
+        url={photographerProfileView.url}
+        name={photographerProfileView.name}
+        picture={photographerProfileView.picture}
+        address={photographerProfileView.address}
+        tagline={photographerProfileView.tagline}
+        formattedPrice={photographerProfileView.formattedPrice}
+      />
+    </article>
   )
 }
