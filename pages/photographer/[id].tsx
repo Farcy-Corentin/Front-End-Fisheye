@@ -1,22 +1,16 @@
-import { IPhotographer, PhotographerApi } from '../../interfaces/IPhotographer'
+import { IPhotographer } from '../../interfaces/IPhotographer'
 import { PhotographerFactory } from '../../factories/PhotographerFactory'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { ParsedUrlQuery } from 'querystring'
 import PhotographerHeader from '../../components/PhotographerHeader'
+import MediaGrid from '../../components/MediaGrid'
+import { getPhotographer } from '../api/photographer/[id]'
 
 interface Props {
-  photographersData: PhotographerApi[]
+  photographer: IPhotographer
 }
 
-export default function Photographer({ photographersData }: Props) {
-  const router = useRouter()
-  const url: ParsedUrlQuery = router.query
-  const id = parseInt(url!.id!.toString())
-
-  const photographer = PhotographerFactory.createPhotographer(
-    photographersData.find((data) => data.id === id)
-  )
+export default function Photographer({ photographer }: Props) {
+  console.log('test', photographer)
   const photographerProfileView =
     PhotographerFactory.createPhotographerProfileView(photographer)
 
@@ -26,12 +20,13 @@ export default function Photographer({ photographersData }: Props) {
         <title>Fisheye - photographe</title>
       </Head>
       <PhotographerHeader photographerProfileView={photographerProfileView} />
+      <MediaGrid photographerId={photographerProfileView.id}></MediaGrid>
     </>
   )
 }
 
 export async function getStaticPaths() {
-  const response = await fetch('http://localhost:3000/api/photographers')
+  const response = await fetch('http://localhost:3000/api/photographer')
   const data = await response.json()
   const photographersData = data.photographers
 
@@ -45,14 +40,13 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/photographers')
-  const data = await response.json()
-  const photographersData = data.photographers
+export async function getStaticProps({ params }) {
+  const id = params.id
+  const photographer = await getPhotographer(id)
 
   return {
     props: {
-      photographersData
+      photographer
     }
   }
 }

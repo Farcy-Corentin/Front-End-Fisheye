@@ -41,10 +41,10 @@ devDependencies:
   typescript: 4.8.4
 
 packages:
-  /@babel/runtime-corejs3/7.20.1:
+  /@babel/runtime-corejs3/7.20.6:
     resolution:
       {
-        integrity: sha512-CGulbEDcg/ND1Im7fUNRZdGXmX2MTWVVZacQi/6DiKE5HNwZ3aVTm5PV4lO8HHz0B2h8WQyvKKjbX5XgTtydsg==
+        integrity: sha512-tqeujPiuEfcH067mx+7otTQWROVMKHXEaOQcAeNV5dDdbPWvPcFA8/W9LXw2NfjNmOetqLl03dfnG2WALPlsRQ==
       }
     engines: { node: '>=6.9.0' }
     dependencies:
@@ -52,10 +52,10 @@ packages:
       regenerator-runtime: 0.13.11
     dev: true
 
-  /@babel/runtime/7.20.1:
+  /@babel/runtime/7.20.6:
     resolution:
       {
-        integrity: sha512-mrzLkl6U9YLF8qpqI7TB82PESyEGjm/0Ly91jG575eVxMMlb8fYfOXFZIJ8XfLrJZQbm7dlKry2bJmXBUEkdFg==
+        integrity: sha512-Q+8MqP7TiHMWzSfwiJwXCjyf4GYA4Dgw3emg/7xmwsdLJOZUp+nMqcOwOzzYheuM1rhDu8FSj2l0aoMygEuXuA==
       }
     engines: { node: '>=6.9.0' }
     dependencies:
@@ -73,7 +73,7 @@ packages:
       debug: 4.3.4
       espree: 9.4.1
       globals: 13.18.0
-      ignore: 5.2.0
+      ignore: 5.2.1
       import-fresh: 3.3.0
       js-yaml: 4.1.0
       minimatch: 3.1.2
@@ -528,8 +528,8 @@ packages:
       }
     engines: { node: '>=6.0' }
     dependencies:
-      '@babel/runtime': 7.20.1
-      '@babel/runtime-corejs3': 7.20.1
+      '@babel/runtime': 7.20.6
+      '@babel/runtime-corejs3': 7.20.6
     dev: true
 
   /array-includes/3.1.6:
@@ -1176,7 +1176,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
     dependencies:
-      '@babel/runtime': 7.20.1
+      '@babel/runtime': 7.20.6
       aria-query: 4.2.2
       array-includes: 3.1.6
       ast-types-flow: 0.0.7
@@ -1205,7 +1205,7 @@ packages:
       eslint: 8.26.0
       eslint-plugin-es: 4.1.0_eslint@8.26.0
       eslint-utils: 3.0.0_eslint@8.26.0
-      ignore: 5.2.0
+      ignore: 5.2.1
       is-core-module: 2.11.0
       minimatch: 3.1.2
       resolve: 1.22.1
@@ -1351,7 +1351,7 @@ packages:
       glob-parent: 6.0.2
       globals: 13.18.0
       grapheme-splitter: 1.0.4
-      ignore: 5.2.0
+      ignore: 5.2.1
       import-fresh: 3.3.0
       imurmurhash: 0.1.4
       is-glob: 4.0.3
@@ -1645,7 +1645,7 @@ packages:
       array-union: 2.1.0
       dir-glob: 3.0.1
       fast-glob: 3.2.12
-      ignore: 5.2.0
+      ignore: 5.2.1
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
@@ -1709,10 +1709,10 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /ignore/5.2.0:
+  /ignore/5.2.1:
     resolution:
       {
-        integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
+        integrity: sha512-d2qQLzTJ9WxQftPAuEQpSPmKqzxePjzVbpAVv62AQ64NTL+wR4JkrVqR/LqFsFEUsHDAiId52mJteHDFuDkElA==
       }
     engines: { node: '>= 4' }
     dev: true
