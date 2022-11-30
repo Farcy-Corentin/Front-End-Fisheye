@@ -4,19 +4,17 @@ export function url(photographerId: number, url: string): string {
   return `/assets/images/${photographerId}/${url}`
 }
 
-export function type(type: string) {
-  return Object.keys(type)
-}
-
 export class MediaFactory {
   static createMedia(mediaApi: MediaApi): IMedia {
     return {
       id: mediaApi.id,
       photographerId: mediaApi.photographerId,
       title: mediaApi.title,
-      type: mediaApi.type,
-      url: url(mediaApi.photographerId, mediaApi.type),
-      like: mediaApi.like,
+      componentType: mediaApi.image ? 'image' : 'video',
+      url: mediaApi.image
+        ? url(mediaApi.photographerId, mediaApi.image)
+        : url(mediaApi.photographerId, mediaApi.video as string),
+      like: mediaApi.likes,
       date: mediaApi.date,
       price: mediaApi.price
     }
@@ -27,7 +25,7 @@ export class MediaFactory {
       id: media.id,
       photographerId: media.photographerId,
       title: media.title,
-      url: url(media.photographerId, media.type),
+      url: media.url,
       like: media.like,
       date: media.date,
       price: media.price
@@ -39,8 +37,7 @@ export class MediaFactory {
       id: media.id,
       photographerId: media.photographerId,
       title: media.title,
-      type: 'video/mp4',
-      url: url(media.photographerId, media.type),
+      url: media.url,
       like: media.like,
       date: media.date,
       price: media.price

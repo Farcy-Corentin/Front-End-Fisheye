@@ -1,22 +1,17 @@
 import { IMedia } from '../interfaces/IMedia'
+import styles from '../styles/pages/Photographer.module.scss'
+import MediaCard from './MediaCard'
 
 interface Props {
-  mediaData?: IMedia[]
-  photographerId: number
+  media: IMedia[]
 }
 
-export default function MediaGrid({ mediaData }: Props) {
-  return <></>
-}
-
-export async function getStaticProps(id: string) {
-  const response = await fetch(`${process.env.API_URL}api/media/${id}`)
-  const data = await response.json()
-  const mediaData = data
-
-  return {
-    props: {
-      mediaData
-    }
-  }
+export default function MediaGrid({ media }: Props) {
+  return (
+    <div className={styles.mediaSection}>
+      {media.map((media) => (
+        <MediaCard key={media.id} media={media} />
+      ))}
+    </div>
+  )
 }

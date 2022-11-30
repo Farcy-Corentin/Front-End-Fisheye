@@ -4,13 +4,16 @@ import Head from 'next/head'
 import PhotographerHeader from '../../components/PhotographerHeader'
 import MediaGrid from '../../components/MediaGrid'
 import { getPhotographer } from '../api/photographer/[id]'
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
+import { getMediaByPhotographer } from '../api/photographer/[id]/[media]'
+import { IMedia } from '../../interfaces/IMedia'
 
 interface Props {
   photographer: IPhotographer
+  media: IMedia[]
 }
 
-export default function Photographer({ photographer }: Props) {
-  console.log('test', photographer)
+export default function Photographer({ photographer, media }: Props) {
   const photographerProfileView =
     PhotographerFactory.createPhotographerProfileView(photographer)
 
@@ -20,13 +23,13 @@ export default function Photographer({ photographer }: Props) {
         <title>Fisheye - photographe</title>
       </Head>
       <PhotographerHeader photographerProfileView={photographerProfileView} />
-      <MediaGrid photographerId={photographerProfileView.id}></MediaGrid>
+      <MediaGrid media={media}></MediaGrid>
     </>
   )
 }
 
 export async function getStaticPaths() {
-  const response = await fetch('http://localhost:3000/api/photographer')
+  const response = await fetch(`${process.env.API_URL}api/photographer`)
   const data = await response.json()
   const photographersData = data.photographers
 
@@ -40,13 +43,16 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: Params) {
   const id = params.id
+
   const photographer = await getPhotographer(id)
+  const media = await getMediaByPhotographer(id)
 
   return {
     props: {
-      photographer
+      photographer,
+      media
     }
   }
 }
