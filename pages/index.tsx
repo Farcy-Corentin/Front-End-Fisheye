@@ -32,7 +32,7 @@ export default function Home({ photographersData }: Props) {
 }
 
 export async function getStaticProps() {
-  const response = await fetch(`${process.env.API_URL}api/photographer`)
+  const response = await fetch(`${process.env.API_URL}/api/photographer`)
   const data = await response.json()
   const photographersData = data.photographers
 

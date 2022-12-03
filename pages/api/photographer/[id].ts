@@ -25,7 +25,7 @@ export default async function handler(
 }
 
 export async function getPhotographer(id: string): Promise<IPhotographer> {
-  const response = await fetch(`${process.env.API_URL}api/photographer/${id}`)
+  const response = await fetch(`${process.env.API_URL}/api/photographer/${id}`)
   const data = await response.json()
 
   return PhotographerFactory.createPhotographer(data)

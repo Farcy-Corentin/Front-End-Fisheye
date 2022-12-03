@@ -22,7 +22,7 @@ export default async function handler(
 
 export async function getMediaByPhotographer(id: string): Promise<IMedia> {
   const response = await fetch(
-    `${process.env.API_URL}api/photographer/${id}/media`
+    `${process.env.API_URL}/api/photographer/${id}/media`
   )
   const data = await response.json()
 
