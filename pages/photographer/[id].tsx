@@ -1,22 +1,19 @@
-import { IPhotographer, PhotographerApi } from '../../interfaces/IPhotographer'
+import { IPhotographer } from '../../interfaces/IPhotographer'
 import { PhotographerFactory } from '../../factories/PhotographerFactory'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { ParsedUrlQuery } from 'querystring'
 import PhotographerHeader from '../../components/PhotographerHeader'
+import MediaGrid from '../../components/MediaGrid'
+import { getPhotographer } from '../api/photographer/[id]'
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
+import { getMediaByPhotographer } from '../api/photographer/[id]/[media]'
+import { IMedia } from '../../interfaces/IMedia'
 
 interface Props {
-  photographersData: PhotographerApi[]
+  photographer: IPhotographer
+  media: IMedia[]
 }
 
-export default function Photographer({ photographersData }: Props) {
-  const router = useRouter()
-  const url: ParsedUrlQuery = router.query
-  const id = parseInt(url!.id!.toString())
-
-  const photographer = PhotographerFactory.createPhotographer(
-    photographersData.find((data) => data.id === id)
-  )
+export default function Photographer({ photographer, media }: Props) {
   const photographerProfileView =
     PhotographerFactory.createPhotographerProfileView(photographer)
 
@@ -26,12 +23,13 @@ export default function Photographer({ photographersData }: Props) {
         <title>Fisheye - photographe</title>
       </Head>
       <PhotographerHeader photographerProfileView={photographerProfileView} />
+      <MediaGrid media={media}></MediaGrid>
     </>
   )
 }
 
 export async function getStaticPaths() {
-  const response = await fetch('http://localhost:3000/api/photographers')
+  const response = await fetch(`${process.env.API_URL}/api/photographer`)
   const data = await response.json()
   const photographersData = data.photographers
 
@@ -45,14 +43,16 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/photographers')
-  const data = await response.json()
-  const photographersData = data.photographers
+export async function getStaticProps({ params }: Params) {
+  const id = params.id
+
+  const photographer = await getPhotographer(id)
+  const media = await getMediaByPhotographer(id)
 
   return {
     props: {
-      photographersData
+      photographer,
+      media
     }
   }
 }

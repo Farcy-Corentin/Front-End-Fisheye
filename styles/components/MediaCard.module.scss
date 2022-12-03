@@ -1,0 +1,29 @@
+@import 'styles/utils/colors';
+@import 'styles/utils/mixins';
+
+.mediaCard {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  border-radius: 5px;
+  margin-bottom: 32px;
+  font-size: 24px;
+  color: map-get($colors, primary, dark);
+}
+
+.img,
+.video {
+  width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.like {
+  font-weight: bold;
+}
+
+.content {
+  @include flex($justify-content: space-between, $align-items: center);
+}

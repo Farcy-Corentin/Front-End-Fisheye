@@ -3,7 +3,6 @@ import {
   PhotographerApi,
   PhotographerProfileView
 } from '../interfaces/IPhotographer'
-import Photographer from '../pages/photographer/[id]'
 
 function formatPrice(price: number): string {
   return price + '€/jour'
