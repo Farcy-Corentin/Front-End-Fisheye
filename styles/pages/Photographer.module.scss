@@ -1,7 +1,28 @@
+@import 'styles/utils/mixins';
+
 .mediaSection {
+  @include flex($flex-direction: column, $align-items: start);
+  margin: 58px 100px 50px 100px;
+  gap: 32px;
+}
+
+.mediaGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 32px 95px;
   justify-content: center;
-  margin: 58px 100px 50px 100px;
+}
+
+.filterSection {
+  @include flex();
+  gap: 25px;
+}
+
+.label {
+  @include flex($align-items: center);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
 }

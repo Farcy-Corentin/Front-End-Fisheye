@@ -5,15 +5,12 @@ import PhotographerHeader from '../../components/PhotographerHeader'
 import MediaGrid from '../../components/MediaGrid'
 import { getPhotographer } from '../api/photographer/[id]'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
-import { getMediaByPhotographer } from '../api/photographer/[id]/[media]'
-import { IMedia } from '../../interfaces/IMedia'
 
 interface Props {
   photographer: IPhotographer
-  media: IMedia[]
 }
 
-export default function Photographer({ photographer, media }: Props) {
+export default function Photographer({ photographer }: Props) {
   const photographerProfileView =
     PhotographerFactory.createPhotographerProfileView(photographer)
 
@@ -23,7 +20,7 @@ export default function Photographer({ photographer, media }: Props) {
         <title>Fisheye - photographe</title>
       </Head>
       <PhotographerHeader photographerProfileView={photographerProfileView} />
-      <MediaGrid media={media}></MediaGrid>
+      <MediaGrid />
     </>
   )
 }
@@ -47,12 +44,10 @@ export async function getStaticProps({ params }: Params) {
   const id = params.id
 
   const photographer = await getPhotographer(id)
-  const media = await getMediaByPhotographer(id)
 
   return {
     props: {
-      photographer,
-      media
+      photographer
     }
   }
 }

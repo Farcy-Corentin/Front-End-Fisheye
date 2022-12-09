@@ -2,7 +2,7 @@
 @import 'styles/utils/variables';
 @import 'styles/utils/mixins';
 
-.contactButton {
+.button {
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -13,8 +13,19 @@
   z-index: 1;
   @include border-none;
   background-color: map-get($colors, primary, dark);
-  border-radius: $border-radius;
   cursor: pointer;
+}
+
+.dropdownButton {
+  @extend .button;
+  position: relative;
+  border-radius: $border-radius $border-radius 0 0;
+  @include flex($justify-content: space-between, $align-items: center);
+}
+
+.contactButton {
+  @extend .button;
+  border-radius: $border-radius;
 }
 
 .contactButton:hover {
@@ -22,12 +33,4 @@
   color: map-get($colors, neutral, dark);
   transition: background-color 150ms 50ms ease-in-out,
     color 150ms 100ms ease-in-out;
-}
-
-.contactButton::after {
-  @include pseudo($content: 'Contactez moi');
-  opacity: 0;
-
-  border-radius: $border-radius;
-  z-index: -1;
 }
