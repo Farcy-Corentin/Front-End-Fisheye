@@ -8,6 +8,8 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa'
 import button from '../styles/components/Button.module.scss'
 import dropdown from '../styles/components/Dropdown.module.scss'
 import { useLocalStorage } from 'react-use'
+import Link from "next/link";
+import Lightbox from "./Lightbox";
 
 interface Filter {
   name: string
@@ -15,7 +17,7 @@ interface Filter {
 }
 
 export default function MediaGrid() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
   const filters: Filter[] = [
     {
@@ -57,21 +59,9 @@ export default function MediaGrid() {
     setSortedMedia(sortedMedia)
   }
 
-  const fetchMedia = async () => {
-    const photographerId = parseInt(router.query.id as string)
-
-    const response = await fetch(
-      `/api/photographer/${photographerId}/media?filter=${currentFilterName}`
-    )
-    const data: MediaApi[] = await response.json()
-
-    setSortedMedia(data.map(MediaFactory.createMedia))
-  }
-
   const [hasMounted, setHasMounted] = useState(false)
   useEffect(() => {
     setHasMounted(true)
-    fetchMedia()
   }, [])
 
   if (!hasMounted) {
@@ -79,46 +69,53 @@ export default function MediaGrid() {
   }
 
   return (
-    <div className={styles.mediaSection}>
-      <div className={styles.filterSection}>
-        <div className={styles.label}>
-          <p className={styles.title}>Trier par</p>
-        </div>
-        <div>
-          <button
-            className={button.dropdownButton}
-            onClick={() => setOpen(!open)}>
-            {currentFilterFr}
-            {open ? <FaAngleUp /> : <FaAngleDown />}
-          </button>
-          {open && (
-            <ul className={dropdown.menu}>
-              {filters
-                .filter((filter) => filter.fr !== currentFilterFr)
-                .map((filter) => (
-                  <li
-                    key={filter.name}
-                    onClick={() => {
-                      setCurrentFilterName(filter.name)
-                      setCurrentFilterFr(filter.fr)
-                      router.push(`${router.query.id}?filter=${filter.name}`)
+      <>
+        {router.query.media && (
+          <Lightbox />
+        )}
+        <div className={styles.mediaSection}>
+          <div className={styles.filterSection}>
+            <div className={styles.label}>
+              <p className={styles.title}>Trier par</p>
+            </div>
+            <div>
+              <button
+                  className={button.dropdownButton}
+                  onClick={() => setOpen(!open)}>
+                {currentFilterFr}
+                {open ? <FaAngleUp /> : <FaAngleDown />}
+              </button>
+              {open && (
+                  <ul className={dropdown.menu}>
+                    {filters
+                        .filter((filter) => filter.fr !== currentFilterFr)
+                        .map((filter) => (
+                            <li
+                                key={filter.name}
+                                onClick={() => {
+                                  setCurrentFilterName(filter.name)
+                                  setCurrentFilterFr(filter.fr)
+                                  router.push(`${router.query.id}?filter=${filter.name}`)
 
-                      setOpen(false)
-                    }}>
-                    {filter.fr}
-                  </li>
-                ))}
-            </ul>
-          )}
+                                  setOpen(false)
+                                }}>
+                              {filter.fr}
+                            </li>
+                        ))}
+                  </ul>
+              )}
+            </div>
+          </div>
+          <div className={styles.mediaGrid}>
+            {sortedMedia
+                ? sortedMedia.map((media) => (
+                    <div key={media.id}>
+                        <MediaCard media={media} />
+                    </div>
+                ))
+                : ''}
+          </div>
         </div>
-      </div>
-      <div className={styles.mediaGrid}>
-        {sortedMedia
-          ? sortedMedia.map((media) => (
-              <MediaCard key={media.id} media={media} />
-            ))
-          : ''}
-      </div>
-    </div>
+      </>
   )
 }

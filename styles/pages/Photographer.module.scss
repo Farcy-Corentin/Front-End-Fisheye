@@ -13,6 +13,11 @@
   justify-content: center;
 }
 
+.mediaGrid a {
+  text-decoration: none;
+  min-height: 100%;
+}
+
 .filterSection {
   @include flex();
   gap: 25px;
