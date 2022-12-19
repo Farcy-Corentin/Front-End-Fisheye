@@ -1,10 +1,37 @@
 import styles from '../styles/components/Lightbox.module.scss'
-import Link from "next/link";
-import {useRouter} from "next/router";
-import {IMedia, MediaApi} from "../interfaces/IMedia";
-import {useEffect, useState} from "react";
-import {MediaFactory} from "../factories/MediaFactory";
-import Image from "next/image";
+import Link from "next/link"
+import {useRouter} from "next/router"
+import {IMedia, MediaApi} from "../interfaces/IMedia"
+import {RefObject, useCallback, useEffect, useRef, useState} from "react"
+import {MediaFactory} from "../factories/MediaFactory"
+import Image from "next/image"
+import {FaChevronLeft, FaChevronRight, FaTimes} from "react-icons/fa";
+import {FocusOn} from "react-focus-on";
+
+function useLightboxNavigation(prevBtn: RefObject<HTMLButtonElement>, nextBtn: RefObject<HTMLButtonElement>) {
+    const [mediaIndex, setMediaIndex] = useState<number>(0)
+
+    const prev = async (media: IMedia[]) => {
+        console.log('prev',prevBtn)
+        prevBtn?.current?.focus()
+        const isFirstMedia = mediaIndex === 0
+        setMediaIndex(isFirstMedia ? media.length - 1 : mediaIndex - 1)
+    }
+
+    const next = async (media: IMedia[]) => {
+        nextBtn?.current?.focus()
+        const isNextMedia = mediaIndex === media.length - 1
+        setMediaIndex(isNextMedia ? 0 : mediaIndex + 1)
+    }
+
+    return {
+        mediaIndex,
+        setMediaIndex,
+        prev,
+        next
+    }
+}
+
 export default function Lightbox() {
     const router = useRouter()
     const photographerId = router.query.id
@@ -12,9 +39,13 @@ export default function Lightbox() {
 
     const [media, setMedia] = useState<IMedia[]>([])
     const [isLoading, setIsLoading] = useState(false)
-    const [currentMediaIndex, setCurrentMediaIndex] = useState<number>(() => 0)
+    const prevBtn = useRef<HTMLButtonElement>(null)
+    const nextBtn = useRef<HTMLButtonElement>(null)
+
+    const { mediaIndex, setMediaIndex, prev, next } = useLightboxNavigation(prevBtn, nextBtn)
 
     const fetchMedia = async () => {
+        setIsLoading(true)
         const photographerId = parseInt(router.query.id as string)
         const defaultFilter = 'title'
         const currentFilterName = localStorage.getItem('name') ? localStorage.getItem('name') : defaultFilter
@@ -22,27 +53,12 @@ export default function Lightbox() {
         const response = await fetch(
             `/api/photographer/${photographerId}/media?filter=${currentFilterName}`
         )
-
         const data: MediaApi[] = await response.json()
         const mediaData = data.map(MediaFactory.createMedia)
 
         setMedia(mediaData)
-        setCurrentMediaIndex(mediaData.findIndex((media) => media.id == parseInt(mediaId as string)))
-        setIsLoading(true)
-    }
-    const prev = async () => {
-        const isFirstMedia = currentMediaIndex === 0
-        const prevIndex = isFirstMedia ? media.length - 1 : currentMediaIndex - 1
-
-        await router.push(`/photographer/${photographerId}/?media=${media[prevIndex].id}`)
-        setCurrentMediaIndex(prevIndex)
-    }
-    const next = async () => {
-        const isNextMedia = currentMediaIndex === media.length - 1
-        const nextIndex = isNextMedia ? 0 : currentMediaIndex + 1
-
-        await router.push(`/photographer/${photographerId}/?media=${media[nextIndex].id}`)
-        setCurrentMediaIndex(nextIndex)
+        setMediaIndex(mediaData.findIndex((media) => media.id === parseInt(mediaId as string)))
+        setIsLoading(false)
     }
 
     const [hasMounted, setHasMounted] = useState(false)
@@ -54,48 +70,81 @@ export default function Lightbox() {
         fetchMedia()
     }, [])
 
-    document.addEventListener('keyup', (e) => e.key === 'ArrowRight' ? next() : null)
+    useEffect(() => {
+        const mediaId = media[mediaIndex]?.id
+        if (mediaId === undefined) {
+            return
+        }
+        router.push(`/photographer/${photographerId}/?media=${mediaId}`).then()
+    }, [media, mediaIndex])
+
+    const onDocumentKeyup =  useCallback(async (event: KeyboardEvent) => {
+        if (event.key === 'ArrowLeft') {
+            await prev(media)
+        }
+        if (event.key === 'ArrowRight') {
+            await next(media)
+        }
+    }, [media, next, prev])
+
+    useEffect(() => {
+        document.addEventListener('keyup', onDocumentKeyup)
+
+        return () => {
+            document.removeEventListener('keyup', onDocumentKeyup)
+        }
+    }, [onDocumentKeyup])
 
     if (!hasMounted) {
         return null
     }
 
-    if (!isLoading) {
+    if (isLoading) {
         return null
     }
 
-    if (media[currentMediaIndex]?.componentType === 'image') {
-        const picture = MediaFactory.createPicture(media[currentMediaIndex])
+    if (media[mediaIndex]?.componentType === 'image') {
+        const picture = MediaFactory.createPicture(media[mediaIndex])
         return (
-            <div className={styles.overlay}>
-                <button className={styles.previousBtn} onClick={prev}>{'<'}</button>
-                <div className={styles.content}>
-                    <Image src={picture.url} alt={picture.title} fill={true} priority={true} style={{
-                        objectFit: 'cover'
-                    }}/>
-                    <p className={styles.title}>{picture.title}</p>
+            <FocusOn onEscapeKey={async () => await router.push(`/photographer/${photographerId}`)}>
+                <div className={styles.overlay} role={"dialog"} aria-modal="true">
+                    <Link className={styles.closeBtn} href={`/photographer/${photographerId}`}>
+                        <FaTimes />
+                    </Link>
+                    <button className={styles.previousBtn} onClick={() => prev(media).then()} ref={prevBtn}>
+                        <FaChevronLeft />
+                    </button>
+                    <div className={styles.content}>
+                        <Image src={picture.url} alt={picture.title} fill={true} priority={true} style={{
+                            objectFit: 'cover'
+                        }}/>
+                        <p className={styles.title}>{picture.title}</p>
+                    </div>
+                    <button className={styles.nextBtn} onClick={() => next(media).then()} ref={nextBtn}>
+                        <FaChevronRight />
+                    </button>
                 </div>
-                <Link className={styles.closeBtn} href={`/photographer/${photographerId}`}>
-                    X
-                </Link>
-                <button className={styles.nextBtn} onClick={next}>{'>'}</button>
-            </div>
+            </FocusOn>
         )
     }
 
-    const video = MediaFactory.createMovie(media[currentMediaIndex])
+    const video = MediaFactory.createMovie(media[mediaIndex])
 
     return (
         <div className={styles.overlay}>
-            <button className={styles.previousBtn} onClick={prev}>{'<'}</button>
+            <Link className={styles.closeBtn} href={`/photographer/${photographerId}`}>
+                <FaTimes />
+            </Link>
+            <button className={styles.previousBtn} onClick={() => prev(media).then()}>
+                <FaChevronLeft />
+            </button>
             <div className={styles.content}>
                 <video src={video.url} controls={true}/>
                 <p className={styles.title}>{video.title}</p>
             </div>
-            <Link className={styles.closeBtn} href={`/photographer/${photographerId}`}>
-                X
-            </Link>
-            <button className={styles.nextBtn} onClick={next}>{'>'}</button>
+            <button className={styles.nextBtn} onClick={() => next(media).then()}>
+                <FaChevronRight />
+            </button>
         </div>
     )
 }

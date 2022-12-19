@@ -1,3 +1,4 @@
 {
-  "extends": ["next/core-web-vitals", "standard", "next", "prettier"]
+  "extends": ["next/core-web-vitals", "standard", "next", "prettier"],
+  "plugins": ["jsx-a11y"]
 }

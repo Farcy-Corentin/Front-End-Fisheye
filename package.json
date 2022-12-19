@@ -17,6 +17,7 @@
     "next": "13.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-focus-on": "^3.7.0",
     "react-icons": "^4.7.1",
     "react-use": "^17.4.0"
   },
@@ -30,11 +31,12 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-n": "^15.6.0",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "2.7.1",
     "prettier-config-standard": "^5.0.0",
-    "sass": "^1.56.1",
+    "sass": "^1.57.0",
     "typescript": "4.8.4"
   }
 }

@@ -19,7 +19,7 @@ export default function MediaCard({media}: Props) {
         return (
             <div className={styles.mediaCard}>
                 <Link href={`/photographer/${router.query.id}?media=${media.id}`}
-                      as={`/photographer/243?media=${media.id}`}>
+                      as={`/photographer/${router.query.id}?media=${media.id}`}>
                     <Image
                         className={styles.img}
                         src={picture.url}
