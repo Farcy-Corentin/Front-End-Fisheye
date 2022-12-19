@@ -34,8 +34,6 @@ export default function Lightbox() {
         const isFirstMedia = currentMediaIndex === 0
         const prevIndex = isFirstMedia ? media.length - 1 : currentMediaIndex - 1
 
-        console.log('preIndex',prevIndex)
-
         await router.push(`/photographer/${photographerId}/?media=${media[prevIndex].id}`)
         setCurrentMediaIndex(prevIndex)
     }
@@ -43,7 +41,6 @@ export default function Lightbox() {
         const isNextMedia = currentMediaIndex === media.length - 1
         const nextIndex = isNextMedia ? 0 : currentMediaIndex + 1
 
-        console.log('preIndex',nextIndex)
         await router.push(`/photographer/${photographerId}/?media=${media[nextIndex].id}`)
         setCurrentMediaIndex(nextIndex)
     }
