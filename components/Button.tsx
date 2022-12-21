@@ -6,10 +6,10 @@ interface Props {
   onClick?: () => void
 }
 
-export default function Button({ type = 'button', label }: Props) {
+export default function Button({ type = 'button', label, onClick }: Props) {
   return (
     <>
-      <button className={styles.contactButton} type={type}>
+      <button className={styles.contactButton} type={type} onClick={onClick}>
         {label}
       </button>
     </>

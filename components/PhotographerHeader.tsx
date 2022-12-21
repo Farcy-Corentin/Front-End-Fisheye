@@ -2,11 +2,15 @@ import { PhotographerProfileView } from '../interfaces/IPhotographer'
 import styles from '../styles/layout/PhotographerHeader.module.scss'
 import Avatar from './Avatar'
 import Button from './Button'
+import ContactFormModal from './ContactFormModal'
+import { useState } from 'react'
 interface Props {
   photographerProfileView: PhotographerProfileView
 }
 
 export default function PhotographerHeader({ photographerProfileView }: Props) {
+  const [isOpenContactFormModal, setIsOpenContactFormModal] =
+    useState<boolean>(false)
   return (
     <header className={styles.photographHeader}>
       <div>
@@ -15,7 +19,16 @@ export default function PhotographerHeader({ photographerProfileView }: Props) {
         <p>{photographerProfileView.tagline}</p>
       </div>
       <div>
-        <Button type="button" label="Contactez-moi" />
+        <Button
+          type="button"
+          label="Contactez-moi"
+          onClick={() => setIsOpenContactFormModal(true)}
+        />
+        <ContactFormModal
+          isOpen={isOpenContactFormModal}
+          setIsOpen={setIsOpenContactFormModal}
+          userName={photographerProfileView.name}
+        />
       </div>
       <div>
         <Avatar
