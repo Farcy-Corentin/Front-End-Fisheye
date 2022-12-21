@@ -19,12 +19,14 @@
     "react-dom": "18.2.0",
     "react-focus-on": "^3.7.0",
     "react-icons": "^4.7.1",
+    "react-modal": "^3.16.1",
     "react-use": "^17.4.0"
   },
   "devDependencies": {
     "@types/node": "18.11.7",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
+    "@types/react-modal": "^3.13.1",
     "cross-env": "^7.0.3",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
@@ -36,7 +38,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "2.7.1",
     "prettier-config-standard": "^5.0.0",
-    "sass": "^1.57.0",
+    "sass": "^1.57.1",
     "typescript": "4.8.4"
   }
 }

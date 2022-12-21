@@ -10,7 +10,6 @@
   width: 170px;
   height: 70px;
   position: relative;
-  z-index: 1;
   @include border-none;
   background-color: map-get($colors, primary, dark);
   cursor: pointer;
