@@ -8,7 +8,6 @@ import {FaAngleDown, FaAngleUp} from 'react-icons/fa'
 import button from '../styles/components/Button.module.scss'
 import dropdown from '../styles/components/Dropdown.module.scss'
 import {useLocalStorage} from 'react-use'
-import Link from "next/link";
 import Lightbox from "./Lightbox";
 
 interface Filter {
