@@ -1,20 +1,19 @@
 import styles from '../styles/components/MediaCard.module.scss'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useLike from '../hooks/useLike'
 
 interface Props {
   like: number
+  likeCounterChange: (like: number) => void
 }
-export default function Like({ like }: Props) {
-  const [likeCounter, setLikeCounter] = useState(like)
-  const [isLike, setIsLike] = useState(false)
-
-  const handleClick = () => {
-    setLikeCounter(likeCounter + (isLike ? -1 : 1))
-    setIsLike(!isLike)
-  }
-
+export default function Like({ like, likeCounterChange }: Props) {
+  const { isLike, likeCounter, handleClick } = useLike(like)
   const HeartIcon = isLike ? FaHeart : FaRegHeart
+
+  useEffect(() => {
+    likeCounterChange(likeCounter)
+  }, [likeCounter])
 
   return (
     <>
