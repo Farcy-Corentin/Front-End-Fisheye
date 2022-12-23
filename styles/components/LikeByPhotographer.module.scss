@@ -1,0 +1,26 @@
+@import "styles/utils/colors";
+@import "styles/utils/mixins";
+
+.LikeBox {
+  @include flex($align-items: center, $justify-content: space-between);
+  gap: 50px;
+  position: fixed;
+  bottom: 0;
+  right: 30px;
+  padding: 30px;
+  font-size: 24px;
+  background-color: lighten(map-get($colors, primary, normal), 20%);
+  border-radius: 5px 5px 0 0;
+  font-weight: 900;
+  animation: fade-up 1s ease-in-out;
+}
+
+@keyframes fade-up {
+  from {
+    transform: translateY(40px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

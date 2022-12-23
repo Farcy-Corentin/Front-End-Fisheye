@@ -2,16 +2,18 @@ import { IMedia } from '../interfaces/IMedia'
 import Image from 'next/image'
 import { MediaFactory } from '../factories/MediaFactory'
 import styles from '../styles/components/MediaCard.module.scss'
-import { FaHeart } from 'react-icons/fa'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Like from './Like'
+import LikesByPhotographer from './LikesByPhotographer'
+import { useCallback, useState } from 'react'
 
 interface Props {
   media: IMedia
+  onLikeChange: (media: IMedia) => void
 }
 
-export default function MediaCard({ media }: Props) {
+export default function MediaCard({ media, onLikeChange }: Props) {
   const router = useRouter()
 
   if (media.componentType === 'image') {
@@ -32,7 +34,13 @@ export default function MediaCard({ media }: Props) {
         </Link>
         <div className={styles.content}>
           <p>{picture.title}</p>
-          <Like like={picture.like} />
+          <Like
+            likeCounterChange={(like) => {
+              picture.like = like
+              onLikeChange(picture as IMedia)
+            }}
+            like={picture.like}
+          />
         </div>
       </div>
     )
@@ -47,9 +55,13 @@ export default function MediaCard({ media }: Props) {
       </Link>
       <div className={styles.content}>
         <p>{video.title}</p>
-        <p className={styles.like}>
-          {video.like} <FaHeart size={18} aria-label="likes" />
-        </p>
+        <Like
+          likeCounterChange={(like) => {
+            video.like = like
+            onLikeChange(video as IMedia)
+          }}
+          like={video.like}
+        />
       </div>
     </div>
   )
