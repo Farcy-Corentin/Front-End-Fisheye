@@ -13,11 +13,11 @@ export default function PhotographerHeader({ photographerProfileView }: Props) {
     useState<boolean>(false)
   return (
     <header className={styles.photographHeader}>
-      <div>
+      <section>
         <h1 className={styles.title}>{photographerProfileView.name}</h1>
         <p className={styles.address}>{photographerProfileView.address}</p>
         <p>{photographerProfileView.tagline}</p>
-      </div>
+      </section>
       <div>
         <Button
           type="button"

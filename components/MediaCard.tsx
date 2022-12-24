@@ -5,8 +5,6 @@ import styles from '../styles/components/MediaCard.module.scss'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Like from './Like'
-import LikesByPhotographer from './LikesByPhotographer'
-import { useCallback, useState } from 'react'
 
 interface Props {
   media: IMedia
@@ -51,6 +49,7 @@ export default function MediaCard({ media, onLikeChange }: Props) {
   return (
     <div className={styles.mediaCard}>
       <Link href={`/photographer/${router.query.id}?media=${media.id}`}>
+        {/* eslint-disable-line no-console */}
         <video className={styles.video} src={video.url} />
       </Link>
       <div className={styles.content}>

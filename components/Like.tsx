@@ -1,7 +1,8 @@
 import styles from '../styles/components/MediaCard.module.scss'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useLike from '../hooks/useLike'
+import button from '../styles/components/Button.module.scss'
 
 interface Props {
   like: number
@@ -16,11 +17,11 @@ export default function Like({ like, likeCounterChange }: Props) {
   }, [likeCounter])
 
   return (
-    <>
-      <p className={styles.like}>
-        {likeCounter}
-        <HeartIcon size={18} aria-label="likes" onClick={handleClick} />
-      </p>
-    </>
+    <p className={styles.like}>
+      {likeCounter}
+      <button className={button.likeBtn} onClick={handleClick} tabIndex={0}>
+        <HeartIcon size={18} aria-label="likes" />
+      </button>
+    </p>
   )
 }

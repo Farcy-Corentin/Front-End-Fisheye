@@ -1,5 +1,5 @@
-@import "/styles/utils/colors";
-@import "/styles/utils/mixins";
+@import '/styles/utils/colors';
+@import '/styles/utils/mixins';
 
 .overlay {
   flex-direction: column;
@@ -21,7 +21,8 @@
   height: 95vh;
 }
 
-.content video, .content img {
+.content video,
+.content img {
   margin: auto;
   max-height: 85vh;
   border-radius: 5px;
