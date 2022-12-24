@@ -19,14 +19,14 @@ export default function Home({ photographersData }: Props) {
         <title>Fisheye</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className={styles.photographer_section}>
+      <section className={styles.photographer_section}>
         {photographers.map((photographer) => (
           <PhotographersSection
             key={photographer.id}
             photographer={photographer}
           />
         ))}
-      </div>
+      </section>
     </>
   )
 }

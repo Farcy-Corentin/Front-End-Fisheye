@@ -55,28 +55,28 @@ export default function ContactFormModal({
         </header>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div>
-            <label>Prénom</label>
+            <label htmlFor="firstname">Prénom</label>
             <input
               value={firstname}
               onChange={(event) => setFirstname(event.target.value)}
             />
           </div>
           <div>
-            <label>Nom</label>
+            <label htmlFor="lastname">Nom</label>
             <input
               value={lastname}
               onChange={(event) => setLastname(event.target.value)}
             />
           </div>
           <div>
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
             <input
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
           </div>
           <div>
-            <label>Message</label>
+            <label htmlFor="message">Message</label>
             <textarea
               value={message}
               onChange={(event) => setMessage(event.target.value)}

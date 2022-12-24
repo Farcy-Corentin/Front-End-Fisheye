@@ -22,14 +22,29 @@
   @include flex($justify-content: space-between, $align-items: center);
 }
 
+.dropdownButton:hover,
+.dropdownButton:focus {
+  background: map-get($colors, primary, normal);
+  transition: background-color 50ms 50ms ease-in-out;
+}
+
 .contactButton {
   @extend .button;
   border-radius: $border-radius;
 }
 
-.contactButton:hover {
+.contactButton:hover,
+.contactButton:focus {
   background-color: map-get($colors, primary, normal);
   color: map-get($colors, neutral, dark);
   transition: background-color 150ms 50ms ease-in-out,
     color 150ms 100ms ease-in-out;
+}
+
+.likeBtn {
+  background: transparent;
+  border: 0;
+  margin-left: 4px;
+  cursor: pointer;
+  color: map-get($colors, primary, dark);
 }

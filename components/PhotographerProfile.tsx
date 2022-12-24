@@ -16,10 +16,12 @@ export default function PhotographerProfile({
       <Link href={url}>
         <Avatar src={picture} alt={name} width={200} height={200} />
       </Link>
-      <h2 className={styles.photographer_profile_title}>{name}</h2>
-      <p className={styles.photographer_profile_address}>{address}</p>
-      <p className={styles.photographer_profile_tagline}>{tagline}</p>
-      <p className={styles.photographer_profile_price}>{formattedPrice}</p>
+      <section>
+        <h2 className={styles.photographer_profile_title}>{name}</h2>
+        <p className={styles.photographer_profile_address}>{address}</p>
+        <p className={styles.photographer_profile_tagline}>{tagline}</p>
+        <p className={styles.photographer_profile_price}>{formattedPrice}</p>
+      </section>
     </>
   )
 }
