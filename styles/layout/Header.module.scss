@@ -1,0 +1,14 @@
+@import 'styles/utils/mixins';
+
+.header {
+  @include flex(
+    $display: flex,
+    $justify-content: space-between,
+    $align-items: center
+  );
+  height: 90px;
+}
+
+.navLink {
+  text-decoration: none;
+}

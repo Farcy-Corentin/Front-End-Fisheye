@@ -1,0 +1,23 @@
+@import 'styles/utils/mixins';
+@import 'styles/utils/colors';
+@import 'styles/utils/spacings';
+
+.photographHeader {
+  @include flex($justify-content: space-between, $align-items: center);
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0 100px;
+  padding: 0 map-get($spacings, lg);
+}
+
+.title {
+  font-size: 64px;
+  color: map-get($colors, primary, normal);
+  margin-bottom: map-get($spacings, md);
+}
+
+.address {
+  font-size: 24px;
+  color: map-get($colors, primary, dark);
+  margin-bottom: map-get($spacings, sm);
+}

@@ -1,0 +1,44 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "prettier": "prettier-config-standard",
+  "ts-standard": {
+    "project": "./tsconfig.json"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prettier": "prettier --write ."
+  },
+  "dependencies": {
+    "next": "13.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-focus-on": "^3.7.0",
+    "react-icons": "^4.7.1",
+    "react-modal": "^3.16.1",
+    "react-use": "^17.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.7",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
+    "@types/react-modal": "^3.13.1",
+    "cross-env": "^7.0.3",
+    "eslint": "8.26.0",
+    "eslint-config-next": "13.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "2.7.1",
+    "prettier-config-standard": "^5.0.0",
+    "sass": "^1.57.1",
+    "typescript": "4.8.4"
+  }
+}

@@ -1,0 +1,79 @@
+@import '/styles/utils/colors';
+@import '/styles/utils/mixins';
+
+.overlay {
+  flex-direction: column;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: map-get($colors, neutral, light);
+}
+
+.content {
+  position: relative;
+  margin: 0 auto;
+  min-width: auto;
+  max-width: 40%;
+  height: 95vh;
+}
+
+.content video,
+.content img {
+  margin: auto;
+  max-height: 85vh;
+  border-radius: 5px;
+}
+
+.content video {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  object-fit: cover;
+}
+
+.closeBtn {
+  color: map-get($colors, primary, dark);
+  text-decoration: none;
+  font-size: 38px;
+  position: absolute;
+  right: 5%;
+  top: 0;
+  padding: 35px;
+  cursor: pointer;
+}
+
+.previousBtn {
+  color: map-get($colors, primary, dark);
+  background: transparent;
+  border: none;
+  font-size: 38px;
+  position: absolute;
+  left: 5%;
+  top: 40vh;
+  padding: 35px;
+  cursor: pointer;
+}
+
+.nextBtn {
+  color: map-get($colors, primary, dark);
+  background: transparent;
+  border: none;
+  font-size: 38px;
+  position: absolute;
+  right: 5%;
+  top: 40vh;
+  padding: 35px;
+  cursor: pointer;
+}
+
+.title {
+  position: absolute;
+  bottom: -0.1%;
+  font-size: 24px;
+  color: map-get($colors, primary, dark);
+}

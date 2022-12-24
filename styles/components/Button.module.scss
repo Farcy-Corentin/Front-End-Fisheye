@@ -1,0 +1,50 @@
+@import 'styles/utils/colors';
+@import 'styles/utils/variables';
+@import 'styles/utils/mixins';
+
+.button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  position: relative;
+  @include border-none;
+  background-color: map-get($colors, primary, dark);
+  cursor: pointer;
+}
+
+.dropdownButton {
+  @extend .button;
+  position: relative;
+  border-radius: $border-radius $border-radius 0 0;
+  @include flex($justify-content: space-between, $align-items: center);
+}
+
+.dropdownButton:hover,
+.dropdownButton:focus {
+  background: map-get($colors, primary, normal);
+  transition: background-color 50ms 50ms ease-in-out;
+}
+
+.contactButton {
+  @extend .button;
+  border-radius: $border-radius;
+}
+
+.contactButton:hover,
+.contactButton:focus {
+  background-color: map-get($colors, primary, normal);
+  color: map-get($colors, neutral, dark);
+  transition: background-color 150ms 50ms ease-in-out,
+    color 150ms 100ms ease-in-out;
+}
+
+.likeBtn {
+  background: transparent;
+  border: 0;
+  margin-left: 4px;
+  cursor: pointer;
+  color: map-get($colors, primary, dark);
+}
