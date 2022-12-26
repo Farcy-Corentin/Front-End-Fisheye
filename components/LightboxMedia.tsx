@@ -27,7 +27,7 @@ export default function LightboxMedia({ media, mediaIndex }: Props) {
       ) : (
         <video src={mediaLightbox.url} controls={true} />
       )}
-      <p className={styles.title}>{mediaLightbox.title}</p>
+      <h1 className={styles.title}>{mediaLightbox.title}</h1>
     </>
   )
 }

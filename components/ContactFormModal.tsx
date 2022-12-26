@@ -57,6 +57,7 @@ export default function ContactFormModal({
           <div>
             <label htmlFor="firstname">Prénom</label>
             <input
+              id="firstname"
               value={firstname}
               onChange={(event) => setFirstname(event.target.value)}
             />
@@ -64,6 +65,7 @@ export default function ContactFormModal({
           <div>
             <label htmlFor="lastname">Nom</label>
             <input
+              id="lastname"
               value={lastname}
               onChange={(event) => setLastname(event.target.value)}
             />
@@ -71,6 +73,7 @@ export default function ContactFormModal({
           <div>
             <label htmlFor="email">Email</label>
             <input
+              id="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -78,6 +81,7 @@ export default function ContactFormModal({
           <div>
             <label htmlFor="message">Message</label>
             <textarea
+              id="message"
               value={message}
               onChange={(event) => setMessage(event.target.value)}
             />

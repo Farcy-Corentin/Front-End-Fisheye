@@ -92,6 +92,7 @@ export default function MediaGrid() {
         <div>
           <button
             tabIndex={0}
+            aria-label="Media filter"
             role={'menu'}
             className={button.dropdownButton}
             onClick={() => setOpen(!open)}
@@ -104,7 +105,7 @@ export default function MediaGrid() {
             {open ? <FaAngleUp /> : <FaAngleDown />}
           </button>
           {open && (
-            <ul className={dropdown.menu}>
+            <ul role="menuitem" className={dropdown.menu}>
               {filters
                 .filter((filter) => filter.fr !== currentFilterFr)
                 .map((filter) => (
