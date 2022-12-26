@@ -121,16 +121,22 @@ export default function Lightbox() {
       onEscapeKey={async () =>
         await router.push(`/photographer/${photographerId}`)
       }>
-      <div className={styles.overlay} role={'dialog'} aria-modal="true">
+      <div
+        className={styles.overlay}
+        role={'dialog'}
+        aria-modal="true"
+        aria-label="Image close up view">
         <Link
           className={styles.closeBtn}
-          href={`/photographer/${photographerId}`}>
+          href={`/photographer/${photographerId}`}
+          aria-label="Close dialog">
           <FaTimes />
         </Link>
         <button
           className={styles.previousBtn}
           onClick={() => prev(media).then()}
-          ref={prevBtn}>
+          ref={prevBtn}
+          aria-label="Previous image">
           <FaChevronLeft />
         </button>
         <div className={styles.content}>
@@ -139,7 +145,8 @@ export default function Lightbox() {
         <button
           className={styles.nextBtn}
           onClick={() => next(media).then()}
-          ref={nextBtn}>
+          ref={nextBtn}
+          aria-label="Next image">
           <FaChevronRight />
         </button>
       </div>
