@@ -22,10 +22,9 @@
   border-radius: 0;
   padding: 0;
   width: 100%;
-  @include flex($justify-content: start, $align-items: center);
+  @include flex($justify-content: flex-start, $align-items: center);
 }
 
-.menu li:hover,
-.menu li:focus {
+.menu li:hover {
   font-weight: 600;
 }

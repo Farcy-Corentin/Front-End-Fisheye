@@ -25,7 +25,7 @@
 
 .label {
   margin-top: 10px;
-  @include flex($align-items: start);
+  @include flex($align-items: flex-start);
 }
 
 .title {

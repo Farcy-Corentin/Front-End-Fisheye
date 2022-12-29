@@ -25,9 +25,12 @@
   @include flex($justify-content: space-between, $align-items: center);
 }
 
-.dropdownButton:hover,
-.dropdownButton:focus {
+.dropdownButton:hover {
   font-weight: 600;
+}
+
+.dropdownButton:focus {
+  border: 2px solid black;
 }
 
 .contactButton {

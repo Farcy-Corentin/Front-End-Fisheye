@@ -18,7 +18,6 @@ interface Filter {
 
 export default function MediaGrid() {
   const [open, setOpen] = useState(false)
-  console.log(open)
 
   const filters: Filter[] = [
     {
