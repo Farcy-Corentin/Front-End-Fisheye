@@ -21,7 +21,7 @@ export default function MediaCard({ media, onLikeChange }: Props) {
       <div className={styles.mediaCard}>
         <Link
           href={`/photographer/${router.query.id}?media=${media.id}`}
-          as={`/photographer/${router.query.id}?media=${media.id}`}>
+          shallow={true}>
           <Image
             className={styles.img}
             src={picture.url}
@@ -48,7 +48,9 @@ export default function MediaCard({ media, onLikeChange }: Props) {
 
   return (
     <div className={styles.mediaCard}>
-      <Link href={`/photographer/${router.query.id}?media=${media.id}`}>
+      <Link
+        href={`/photographer/${router.query.id}?media=${media.id}`}
+        shallow={true}>
         {/* eslint-disable-line no-console */}
         <video className={styles.video} src={video.url} />
       </Link>
