@@ -95,7 +95,16 @@ export default function MediaGrid() {
             aria-label="Media filter"
             role={'menu'}
             className={button.dropdownButton}
-            onClick={() => setOpen(!open)}
+            onClick={() => {
+              setOpen(!open)
+              const isOpen = !open
+              const filterBtn: HTMLButtonElement = document.querySelector(
+                `.${button.dropdownButton}`
+              )!
+              isOpen
+                ? (filterBtn.style.borderRadius = '5px 5px 0 0')
+                : (filterBtn.style.borderRadius = '5px')
+            }}
             onKeyUp={(event) => {
               if (event.key === 'Escape') {
                 setOpen(false)
