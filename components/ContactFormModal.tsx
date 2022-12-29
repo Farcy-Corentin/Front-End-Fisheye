@@ -50,6 +50,11 @@ export default function ContactFormModal({
             width={50}
             height={50}
             onClick={() => setIsOpen(false)}
+            onKeyUp={(event) => {
+              if (event.key === 'Enter') {
+                setIsOpen(false)
+              }
+            }}
             tabIndex={0}
           />
         </header>

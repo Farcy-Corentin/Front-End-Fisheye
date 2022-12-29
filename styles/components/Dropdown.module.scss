@@ -4,22 +4,27 @@
 @import 'styles/components/Button.module';
 
 .menu {
+  @include flex($flex-direction: column);
   position: absolute;
   background: map-get($colors, primary, dark);
   list-style: none;
   z-index: 1;
+  @extend .dropdownButton;
+  padding: 0 11px;
+  height: auto;
   border-radius: 0 0 $border-radius $border-radius;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .menu li {
   border-top: 1px solid white;
-  @extend .button;
-  @include flex($justify-content: start, $align-items: center);
+  @extend .dropdownButton;
+  border-radius: 0;
+  padding: 0;
+  width: 100%;
+  @include flex($justify-content: flex-start, $align-items: center);
 }
 
-.menu li:hover,
-.menu li:focus {
-  background: map-get($colors, primary, normal);
-  transition: background-color 50ms 50ms ease-in-out;
+.menu li:hover {
+  font-weight: 600;
 }
