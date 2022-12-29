@@ -15,7 +15,6 @@ function useLightboxNavigation(
   const [mediaIndex, setMediaIndex] = useState<number>(0)
 
   const prev = async (media: IMedia[]) => {
-    console.log('prev', prevBtn)
     prevBtn?.current?.focus()
     const isFirstMedia = mediaIndex === 0
     setMediaIndex(isFirstMedia ? media.length - 1 : mediaIndex - 1)
@@ -85,7 +84,11 @@ export default function Lightbox() {
     if (mediaId === undefined) {
       return
     }
-    router.push(`/photographer/${photographerId}/?media=${mediaId}`).then()
+    router
+      .push(`/photographer/${photographerId}/?media=${mediaId}`, undefined, {
+        shallow: true
+      })
+      .then()
   }, [media, mediaIndex])
 
   const onDocumentKeyup = useCallback(
